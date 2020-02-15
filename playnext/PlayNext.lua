@@ -60,7 +60,13 @@
 						.."<br /><br />To use Play next, start playing a file.")
 			vlc.msg.dbg("[Play Next] No item has been selected.")
 		else	
-			enqueue_next(item) -- starts the "Find Similar" process
+                    while true do 
+                        if vlc.playlist.current() - 2 == #vlc.playlist.get("normal", false).children then
+                            vlc.msg.dbg("[Play Next] This is the last video. Adding one..")
+			    enqueue_next(item) -- starts the "Find Similar" process
+                        end
+                        os.execute("sleep "..tonumber(1))
+                    end
 		end
 	end
 

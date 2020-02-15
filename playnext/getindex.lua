@@ -1,9 +1,31 @@
+--[[
+ Play Next, testing version
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+--]]
+
+--[[ Extension description ]]
+
+
+
 	function descriptor()
 		return { title = "get index" ;
 				 version = "alpha" ;
 				 author = "khu" ;
 				 shortdesc = "get index.";
-				 description = "<h1>Get Index</h1>"
+				 description = "<h1>Get Index</h1>";
 				 capabilities = { "input-listener", "meta-listener" } }
 	end
 
@@ -33,7 +55,9 @@
 		if not item then -- return an alert box explaining what the user should do
 			vlc.msg.dbg("[Get Index] No item has been selected.")
 		else	
-                        vlc.msg.dbg("[Get Index] Index: "..playlist.current())
+                        vlc.msg.dbg("[Get Index] Index: "..vlc.playlist.current())
+                        vlc.msg.dbg("[GI] getnormal:"..#vlc.playlist.get("normal", false).children)
+
 		end
 	end
 
@@ -71,3 +95,12 @@ function split(str, pat)
    end
    return t
 end
+
+
+function tostr(obj)
+    if type(obj) == "table" then
+        return table.concat(obj, "|")
+    end
+    return obj
+end
+
